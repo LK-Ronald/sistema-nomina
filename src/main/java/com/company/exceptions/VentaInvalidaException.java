@@ -1,9 +1,9 @@
 package com.company.exceptions;
 
-public class VentaInvalidaException extends RuntimeException {
-    private static final String MENSAJE = "La cantidad de la venta no puede ser negativa";
+public class VentaInvalidaException extends DomainException {
+    private static final String MENSAJE = "El valor de las ventas no puede ser nulo ni negativo";
 
-    private VentaInvalidaException(String message) {
+    public VentaInvalidaException(String message) {
         super(message);
     }
 

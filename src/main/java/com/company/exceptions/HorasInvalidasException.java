@@ -1,9 +1,9 @@
 package com.company.exceptions;
 
-public class HorasInvalidasException extends RuntimeException {
+public class HorasInvalidasException extends DomainException {
     private static final String MENSAJE = "Las horas de trabajo no pueden ser negativas";
 
-    private HorasInvalidasException(String message) {
+    public HorasInvalidasException(String message) {
         super(message);
     }
 

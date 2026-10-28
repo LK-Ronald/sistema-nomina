@@ -1,22 +1,29 @@
 package com.company.models;
 
 import com.company.enums.TipoTrabajador;
+import com.company.util.Validaciones;
 
 public abstract class Empleado {
     private final String nombre;
     private final String cedula;
     private final int anosAntiguedad;
+    private final boolean esEmpleadoPermanente;
 
-    public Empleado(final String nombre,final String cedula,final int anosAntiguedad) {
+    public Empleado(final String nombre, final String cedula, final int anosAntiguedad) {
         this.nombre = nombre;
         this.cedula = cedula;
-        this.anosAntiguedad = anosAntiguedad;
+        this.anosAntiguedad = Validaciones.validarAntiguedad(anosAntiguedad);
+        this.esEmpleadoPermanente = false;
     }
 
-    abstract public TipoTrabajador getTipoTrabajador();
+    public abstract TipoTrabajador getTipoTrabajador();
 
-    public boolean puedeAccederFondoAhorro(){
+    public boolean puedeAccederFondoAhorro() {
         return false;
+    }
+
+    public boolean esEmpleadoPermanente() {
+        return esEmpleadoPermanente;
     }
 
     public String getNombre() {

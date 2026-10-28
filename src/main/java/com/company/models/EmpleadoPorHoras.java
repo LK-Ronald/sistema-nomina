@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class EmpleadoPorHoras extends Empleado {
     private final BigDecimal tarifaPorHoras;
     private final int horasTrabajadas;
-    private final TipoTrabajador TIPO_TRABAJADOR = TipoTrabajador.POR_HORAS;
+    private static final TipoTrabajador TIPO_TRABAJADOR = TipoTrabajador.POR_HORAS;
     private final boolean aceptaFondoAhorro;
 
     public EmpleadoPorHoras(final String nombre, final String cedula, final int anosAntiguedad,
@@ -17,28 +17,24 @@ public class EmpleadoPorHoras extends Empleado {
         super(nombre, cedula, anosAntiguedad);
         this.horasTrabajadas = Validaciones.validarHoras(horasTrabajadas);
         this.aceptaFondoAhorro = aceptaFondoAhorro;
-        this.tarifaPorHoras = tarifaPorHoras;
+        this.tarifaPorHoras = Validaciones.validarTarifa(tarifaPorHoras);
     }
 
     public BigDecimal getTarifaPorHoras() {
         return tarifaPorHoras;
     }
 
-    public int getHorasNormales() {
-        return Math.min(horasTrabajadas, FinanceConstants.HORAS_SIN_RECARGO);
+    public int getHorasTrabajadas() {
+        return horasTrabajadas;
     }
 
-    public int getHorasExtras() {
-        return Math.max(Math.subtractExact(horasTrabajadas, FinanceConstants.HORAS_SIN_RECARGO), 0);
-    }
-
-    public BigDecimal getMontoPorHoras() {
-        return tarifaPorHoras.multiply(BigDecimal.valueOf(getHorasNormales()));
+    public boolean isAceptaFondoAhorro() {
+        return aceptaFondoAhorro;
     }
 
     @Override
     public boolean puedeAccederFondoAhorro() {
-        return aceptaFondoAhorro && getAnosAntiguedad() > 1;
+        return aceptaFondoAhorro && getAnosAntiguedad() > FinanceConstants.ANIOS_PARA_FONDO_AHORRO;
     }
 
     @Override

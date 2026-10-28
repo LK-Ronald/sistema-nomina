@@ -5,13 +5,20 @@ import com.company.util.Validaciones;
 
 import java.math.BigDecimal;
 
-public class EmpleadoSalariado extends Empleado {
+public class EmpleadoAsalariado extends Empleado {
     private final BigDecimal salarioMensual;
-    private final TipoTrabajador TIPO_TRABAJADOR = TipoTrabajador.ASALARIADO;
+    private static final TipoTrabajador TIPO_TRABAJADOR = TipoTrabajador.ASALARIADO;
+    private final boolean esEmpleadoPermanente;
 
-    public EmpleadoSalariado(String nombre, String cedula, int anosAntiguedad, BigDecimal salario) {
+    public EmpleadoAsalariado(String nombre, String cedula, int anosAntiguedad, BigDecimal salario) {
         super(nombre, cedula, anosAntiguedad);
         this.salarioMensual = Validaciones.validarSalarioNeto(salario);
+        this.esEmpleadoPermanente = true;
+    }
+
+    @Override
+    public boolean esEmpleadoPermanente() {
+        return esEmpleadoPermanente;
     }
 
     public BigDecimal getSalarioMensual() {

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class EmpleadoTemporal extends Empleado {
     private final BigDecimal salarioFijoMensual;
     private final int mesesContrato;
-    private final TipoTrabajador TIPO_TRABAJADOR = TipoTrabajador.TEMPORAL;
+    private static final TipoTrabajador TIPO_TRABAJADOR = TipoTrabajador.TEMPORAL;
 
     public EmpleadoTemporal(String nombre, String cedula, int anosAntiguedad,
                             BigDecimal salarioFijoMensual, int mesesContrato) {
@@ -29,6 +29,4 @@ public class EmpleadoTemporal extends Empleado {
     public TipoTrabajador getTipoTrabajador() {
         return TIPO_TRABAJADOR;
     }
-
-
 }

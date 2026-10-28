@@ -6,17 +6,24 @@ import com.company.util.Validaciones;
 import java.math.BigDecimal;
 
 public class EmpleadoPorComision extends Empleado {
-    private final TipoTrabajador TIPO_TRABAJADOR = TipoTrabajador.POR_COMISION;
+    private static final TipoTrabajador TIPO_TRABAJADOR = TipoTrabajador.POR_COMISION;
     private final BigDecimal salarioBase;
     private final double porcentajeComision;
-    private final int cantidadVentas;
+    private final BigDecimal ventas;
+    private final boolean empleadoPermanente;
 
     public EmpleadoPorComision(String nombre, String cedula, int anosAntiguedad,
-                               BigDecimal salarioBase, double porcentajeComision, int cantidadVentas) {
+                               BigDecimal salarioBase, double porcentajeComision, BigDecimal ventas) {
         super(nombre, cedula, anosAntiguedad);
         this.salarioBase = Validaciones.validarSalarioNeto(salarioBase);
         this.porcentajeComision = porcentajeComision;
-        this.cantidadVentas = Validaciones.validarCantidad(cantidadVentas);
+        this.ventas = Validaciones.validarVentas(ventas);
+        this.empleadoPermanente = true;
+    }
+
+    @Override
+    public boolean esEmpleadoPermanente() {
+        return empleadoPermanente;
     }
 
     public BigDecimal getSalarioBase() {
@@ -27,13 +34,12 @@ public class EmpleadoPorComision extends Empleado {
         return porcentajeComision;
     }
 
-    public int getCantidadVentas() {
-        return cantidadVentas;
+    public BigDecimal getVentas() {
+        return ventas;
     }
 
     @Override
     public TipoTrabajador getTipoTrabajador() {
         return TIPO_TRABAJADOR;
     }
-
 }
